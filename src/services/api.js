@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8080/api/calc";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 export const calculateAge = async (dob) => {
     const res = await fetch(`${BASE_URL}/age?dob=${dob}`);
