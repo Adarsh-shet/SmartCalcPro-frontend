@@ -1,46 +1,46 @@
-const BASE_URL = process.env.REACT_APP_API_URL;
+// Ensure no trailing slash from environment variable
+const BASE = process.env.REACT_APP_API_URL?.replace(/\/+$/, "") || "";
+
+// Helper function to call API safely
+const apiGet = async (path) => {
+    const res = await fetch(`${BASE}${path}`);
+
+    if (!res.ok) {
+        console.error("API ERROR:", res.status, res.statusText);
+        throw new Error("API Error");
+    }
+
+    return res.json();
+};
 
 // AGE API
 export const calculateAge = async (dob) => {
-    const res = await fetch(`${BASE_URL}/api/calc/age?dob=${dob}`);
-    if (!res.ok) throw new Error("API Error");
-    return res.json();
+    return apiGet(`/api/calc/age?dob=${dob}`);
 };
 
 // EXPERIENCE API
 export const calculateExperience = async (startDate) => {
-    const res = await fetch(`${BASE_URL}/api/calc/experience?startDate=${startDate}`);
-    if (!res.ok) throw new Error("API Error");
-    return res.json();
+    return apiGet(`/api/calc/experience?startDate=${startDate}`);
 };
 
 // GENERAL CALCULATOR
 export const calculateGeneral = async (num1, num2, operation) => {
-    const res = await fetch(`${BASE_URL}/api/calc/${operation}?a=${num1}&b=${num2}`);
-    if (!res.ok) throw new Error("API Error");
-    return res.json();
+    return apiGet(`/api/calc/${operation}?a=${num1}&b=${num2}`);
 };
 
-// ADD
+// Specific Operations (optional but kept)
 export const addNumbers = async (a, b) => {
-    const res = await fetch(`${BASE_URL}/api/calc/add?a=${a}&b=${b}`);
-    return res.json();
+    return apiGet(`/api/calc/add?a=${a}&b=${b}`);
 };
 
-// SUB
 export const subtractNumbers = async (a, b) => {
-    const res = await fetch(`${BASE_URL}/api/calc/sub?a=${a}&b=${b}`);
-    return res.json();
+    return apiGet(`/api/calc/sub?a=${a}&b=${b}`);
 };
 
-// MULTIPLY
 export const multiplyNumbers = async (a, b) => {
-    const res = await fetch(`${BASE_URL}/api/calc/mul?a=${a}&b=${b}`);
-    return res.json();
+    return apiGet(`/api/calc/mul?a=${a}&b=${b}`);
 };
 
-// DIVIDE
 export const divideNumbers = async (a, b) => {
-    const res = await fetch(`${BASE_URL}/api/calc/div?a=${a}&b=${b}`);
-    return res.json();
+    return apiGet(`/api/calc/div?a=${a}&b=${b}`);
 };
