@@ -14,6 +14,13 @@ export const calculateExperience = async (startDate) => {
     return res.json();
 };
 
+// GENERAL CALCULATOR
+export const calculateGeneral = async (num1, num2, operation) => {
+    const res = await fetch(`${BASE_URL}/api/calc/${operation}?a=${num1}&b=${num2}`);
+    if (!res.ok) throw new Error("API Error");
+    return res.json();
+};
+
 // ADD
 export const addNumbers = async (a, b) => {
     const res = await fetch(`${BASE_URL}/api/calc/add?a=${a}&b=${b}`);
