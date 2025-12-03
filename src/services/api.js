@@ -1,33 +1,39 @@
-const BASE_URL = process.env.REACT_APP_API_URL || "https://smartcalcpro-backend.onrender.com";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
+// AGE API
 export const calculateAge = async (dob) => {
-    const res = await fetch(`${BASE_URL}/age?dob=${dob}`);
-    if (!res.ok) throw new Error("Network response not ok");
+    const res = await fetch(`${BASE_URL}/api/calc/age?dob=${dob}`);
+    if (!res.ok) throw new Error("API Error");
     return res.json();
 };
 
+// EXPERIENCE API
 export const calculateExperience = async (startDate) => {
-    const res = await fetch(`${BASE_URL}/experience?startDate=${startDate}`);
-    if (!res.ok) throw new Error("Network response not ok");
+    const res = await fetch(`${BASE_URL}/api/calc/experience?startDate=${startDate}`);
+    if (!res.ok) throw new Error("API Error");
     return res.json();
 };
 
-export const calculateEMI = async (principal, rate, months) => {
-    const res = await fetch(`${BASE_URL}/emi?principal=${principal}&rate=${rate}&months=${months}`);
-    if (!res.ok) throw new Error("Network response not ok");
+// ADD
+export const addNumbers = async (a, b) => {
+    const res = await fetch(`${BASE_URL}/api/calc/add?a=${a}&b=${b}`);
     return res.json();
 };
 
-export const calculateGeneral = async (a, b, op) => {
-    let endpoint = "";
-    switch(op) {
-        case "add": endpoint = "add"; break;
-        case "subtract": endpoint = "sub"; break;
-        case "multiply": endpoint = "mul"; break;
-        case "divide": endpoint = "div"; break;
-        default: endpoint = "add";
-    }
-    const res = await fetch(`${BASE_URL}/${endpoint}?a=${a}&b=${b}`);
-    if (!res.ok) throw new Error("Network response not ok");
+// SUB
+export const subtractNumbers = async (a, b) => {
+    const res = await fetch(`${BASE_URL}/api/calc/sub?a=${a}&b=${b}`);
+    return res.json();
+};
+
+// MULTIPLY
+export const multiplyNumbers = async (a, b) => {
+    const res = await fetch(`${BASE_URL}/api/calc/mul?a=${a}&b=${b}`);
+    return res.json();
+};
+
+// DIVIDE
+export const divideNumbers = async (a, b) => {
+    const res = await fetch(`${BASE_URL}/api/calc/div?a=${a}&b=${b}`);
     return res.json();
 };
