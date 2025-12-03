@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = process.env.REACT_APP_API_URL || "https://smartcalcpro-backend.onrender.com";
 
 export const calculateAge = async (dob) => {
     const res = await fetch(`${BASE_URL}/age?dob=${dob}`);
