@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { calculateAge } from '../services/api';
+import { calculateAge } from '../api';
 
 function AgeCalculator() {
     const [dob, setDob] = useState('');
