@@ -1,4 +1,4 @@
-const BASE_URL = "https://smartcalcpro-backend.onrender.com/api/calc"; // No trailing slash!
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 // AGE API
 export const calculateAge = async (dob) => {
@@ -12,7 +12,7 @@ export const calculateExperience = async (startDate) => {
     return res.json();
 };
 
-// GENERAL CALCULATOR
+// GENERAL CALCULATOR API
 export const calculateGeneral = async (num1, num2, operation) => {
     const res = await fetch(`${BASE_URL}/${operation}?a=${num1}&b=${num2}`);
     return res.json();
