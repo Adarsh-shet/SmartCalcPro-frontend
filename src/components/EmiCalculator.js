@@ -1,56 +1,44 @@
-// import React, { useState } from "react";
-// import BASE_URL from "../api";
+import React, { useState } from "react";
 
-// function EmiCalculator() {
-//     const [principal, setPrincipal] = useState("");
-//     const [rate, setRate] = useState("");
-//     const [tenure, setTenure] = useState("");
-//     const [result, setResult] = useState(null);
+function EmiCalculator() {
+    const [principal, setPrincipal] = useState("");
+    const [rate, setRate] = useState("");
+    const [months, setMonths] = useState("");
+    const [emi, setEmi] = useState("");
 
-//     const calculateEMI = async () => {
-//         const res = await fetch(
-//             `${BASE_URL}/emi?principal=${principal}&rate=${rate}&tenure=${tenure}`
-//         );
-//         const data = await res.json();
-//         setResult(data);
-//     };
+    const calculateEMI = () => {
+        if (!principal || !rate || !months)
+            return alert("Enter all fields");
 
-//     return (
-//         <div>
-//             <h2>EMI Calculator</h2>
+        let r = rate / 12 / 100;
+        let emiValue =
+            (principal * r * Math.pow(1 + r, months)) /
+            (Math.pow(1 + r, months) - 1);
 
-//             <input
-//                 type="number"
-//                 placeholder="Principal"
-//                 value={principal}
-//                 onChange={(e) => setPrincipal(e.target.value)}
-//             />
+        setEmi(emiValue.toFixed(2));
+    };
 
-//             <input
-//                 type="number"
-//                 placeholder="Interest Rate"
-//                 value={rate}
-//                 onChange={(e) => setRate(e.target.value)}
-//             />
+    return (
+        <div className="calculator-box">
+            <h2>EMI Calculator</h2>
 
-//             <input
-//                 type="number"
-//                 placeholder="Tenure (Months)"
-//                 value={tenure}
-//                 onChange={(e) => setTenure(e.target.value)}
-//             />
+            <input type="number" placeholder="Loan amount (₹)"
+                value={principal}
+                onChange={(e) => setPrincipal(e.target.value)} />
 
-//             <button onClick={calculateEMI}>Calculate</button>
+            <input type="number" placeholder="Annual interest rate (%)"
+                value={rate}
+                onChange={(e) => setRate(e.target.value)} />
 
-//             {result && (
-//                 <p>
-//                     EMI: ₹{result.emi} <br />
-//                     Total Interest: ₹{result.totalInterest} <br />
-//                     Total Amount: ₹{result.totalAmount}
-//                 </p>
-//             )}
-//         </div>
-//     );
-// }
+            <input type="number" placeholder="Loan period (months)"
+                value={months}
+                onChange={(e) => setMonths(e.target.value)} />
 
-// export default EmiCalculator;
+            <button onClick={calculateEMI}>Calculate EMI</button>
+
+            {emi && <p className="result-text">EMI: ₹{emi}</p>}
+        </div>
+    );
+}
+
+export default EmiCalculator;
