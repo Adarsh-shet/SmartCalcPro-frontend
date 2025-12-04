@@ -11,12 +11,23 @@ function App() {
 
     return (
         <div className="App">
-            <h1>SmartCalc Pro</h1>
+            <header>
+                <h1>SmartCalc <span className="pro">Pro</span></h1>
+                <p className="tag">Fast • Bright • Friendly</p>
+            </header>
+
             <Navbar setPage={setPage} />
-            {page === 'age' && <AgeCalculator />}
-            {page === 'experience' && <ExperienceCalculator />}
-            {page === 'emi' && <EmiCalculator />}
-            {page === 'general' && <GeneralCalculator />}
+
+            <main>
+                {page === 'age' && <AgeCalculator />}
+                {page === 'experience' && <ExperienceCalculator />}
+                {page === 'emi' && <EmiCalculator />}
+                {page === 'general' && <GeneralCalculator />}
+            </main>
+
+            <footer>
+                <small>SmartCalcPro — colorful UI (Option C) — No dark mode</small>
+            </footer>
         </div>
     );
 }
