@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { calculateGeneral } from "../services/api";
+import { calculateGeneral } from "../api";
 
 function GeneralCalculator() {
     const [num1, setNum1] = useState("");
