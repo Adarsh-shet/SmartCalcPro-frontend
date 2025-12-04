@@ -1,36 +1,36 @@
-import React, { useState } from "react";
-import { calculateAge } from "../services/api";
+import React, { useState } from 'react';
+import { calculateAge } from '../services/api';
 
 function AgeCalculator() {
-    const [dob, setDob] = useState("");
-    const [result, setResult] = useState("");
+    const [dob, setDob] = useState('');
+    const [data, setData] = useState(null);
 
     const handleSubmit = async () => {
-        if (!dob) return alert("Please select your date of birth");
+        if (!dob) return alert("Please select your Date of Birth");
 
-        try {
-            const res = await calculateAge(dob);
-            setResult(res);
-        } catch (err) {
-            alert("Failed to fetch age");
-        }
+        const result = await calculateAge(dob);
+        setData(result);
     };
 
     return (
         <div className="calculator-box">
             <h2>Age Calculator</h2>
 
-            <label>Date of Birth</label>
-            <input type="date"
-                   value={dob}
-                   onChange={(e) => setDob(e.target.value)}
-                   placeholder="Enter your date of birth" />
+            <input
+                type="date"
+                placeholder="Enter your Date of Birth"
+                value={dob}
+                onChange={e => setDob(e.target.value)}
+            />
 
-            <button onClick={handleSubmit}>Calculate Age</button>
+            <button className="btn" onClick={handleSubmit}>Calculate Age</button>
 
-            {result && <p className="result-text">You are: {result}</p>}
+            {data && (
+                <p className="result-text">
+                    {data.years} Years, {data.months} Months, {data.days} Days
+                </p>
+            )}
         </div>
     );
 }
-
 export default AgeCalculator;
