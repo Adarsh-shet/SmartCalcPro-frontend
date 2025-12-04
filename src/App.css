@@ -1,85 +1,62 @@
-/* Global Styles */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f5f7;
-}
-
-/* App Container */
 .App {
-    text-align: center;
-    padding: 20px;
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-/* Main Title */
-.App h1 {
-    font-size: 32px;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 20px;
-}
-
-/* Calculator Boxes */
-div {
-    margin: 20px auto;
-    padding: 20px;
-    width: 350px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-/* Input Fields */
-input {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: 1px solid #bbb;
-    font-size: 14px;
-}
-
-/* Buttons */
-button {
-    background-color: #0078ff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.2s;
-}
-
-button:hover {
-    background-color: #005ecc;
-}
-
-/* Navbar */
 .navbar {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
 .navbar button {
-    background-color: #444;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .navbar button:hover {
-    background-color: #222;
+  background-color: #0c56c1;
 }
 
-/* Result text */
-p {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-top: 15px;
+.calculator-box {
+  width: 350px;
+  margin: auto;
+  padding: 20px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+}
+
+.calculator-box input,
+.calculator-box select {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.calculator-box button {
+  width: 95%;
+  padding: 10px;
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.calculator-box button:hover {
+  background-color: #0c56c1;
+}
+
+h3 {
+  margin-top: 15px;
+  font-size: 20px;
+  color: #333;
 }
