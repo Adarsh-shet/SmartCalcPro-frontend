@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
-import { calculateExperience } from '../api';
+import React, { useState } from "react";
+import BASE_URL from "../api";
 
 function ExperienceCalculator() {
-    const [startDate, setStartDate] = useState('');
-    const [experience, setExperience] = useState(null);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [result, setResult] = useState(null);
 
-    const handleSubmit = async () => {
-        if (!startDate) return;
-        try {
-            const result = await calculateExperience(startDate);
-            setExperience(result);
-        } catch(err) {
-            console.error("Fetch error:", err);
-        }
+    const calculateExperience = async () => {
+        const res = await fetch(
+            `${BASE_URL}/experience?startDate=${startDate}&endDate=${endDate}`
+        );
+        const data = await res.json();
+        setResult(data);
     };
 
     return (
-        <div className="calculator-box">
+        <div>
             <h2>Experience Calculator</h2>
-            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-            <button onClick={handleSubmit}>Calculate Experience</button>
-            {experience !== null && <p>Experience: {experience} years</p>}
+
+            <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+            />
+
+            <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+            />
+
+            <button onClick={calculateExperience}>Calculate</button>
+
+            {result && (
+                <p>
+                    Experience: {result.years} years, {result.months} months,{" "}
+                    {result.days} days
+                </p>
+            )}
         </div>
     );
 }
