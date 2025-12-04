@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { calculateExperience } from '../services/api';
+import { calculateExperience } from '../api';
 
 function ExperienceCalculator() {
     const [startDate, setStartDate] = useState('');
