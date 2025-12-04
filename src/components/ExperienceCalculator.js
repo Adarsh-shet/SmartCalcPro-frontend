@@ -2,30 +2,42 @@ import React, { useState } from 'react';
 import { calculateExperience } from '../services/api';
 
 function ExperienceCalculator() {
-    const [start, setStart] = useState('');
-    const [end, setEnd] = useState('');
-    const [exp, setExp] = useState('');
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [exp, setExp] = useState(null);
 
     const handleSubmit = async () => {
-        if (!start) return;
+        if (!startDate) return alert("Please enter start date");
 
-        const response = await calculateExperience(start, end);
-        setExp(response);
+        try {
+            const result = await calculateExperience(startDate, endDate);
+            setExp(result);
+        } catch(err) {
+            alert("API error");
+        }
     };
 
     return (
-        <div className="card">
-            <h2>Experience Calculator</h2>
+        <div className="calculator-box">
+            <h2>💼 Experience Calculator</h2>
 
-            <label>Start Date</label>
-            <input type="date" value={start} onChange={(e) => setStart(e.target.value)} />
+            <input 
+                type="date"
+                placeholder="Start Date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+            />
 
-            <label>End Date (optional)</label>
-            <input type="date" value={end} onChange={(e) => setEnd(e.target.value)} />
+            <input 
+                type="date"
+                placeholder="End Date (optional)"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+            />
 
-            <button onClick={handleSubmit}>Calculate</button>
+            <button onClick={handleSubmit}>Calculate Experience</button>
 
-            {exp && <p className="result">{exp}</p>}
+            {exp && <p><strong>Experience:</strong> {exp}</p>}
         </div>
     );
 }
