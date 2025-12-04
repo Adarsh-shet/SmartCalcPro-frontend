@@ -1,43 +1,37 @@
-import React, { useState } from 'react';
-import { calculateExperience } from '../services/api';
+import React, { useState } from "react";
+import { calculateExperience } from "../services/api";
 
 function ExperienceCalculator() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [exp, setExp] = useState(null);
+    const [result, setResult] = useState("");
 
     const handleSubmit = async () => {
-        if (!startDate) return alert("Please enter start date");
-
+        if (!startDate) return alert("Enter start date");
+        
         try {
-            const result = await calculateExperience(startDate, endDate);
-            setExp(result);
-        } catch(err) {
-            alert("API error");
+            const res = await calculateExperience(startDate, endDate);
+            setResult(res);
+        } catch (err) {
+            alert("Error fetching experience");
         }
     };
 
     return (
         <div className="calculator-box">
-            <h2>💼 Experience Calculator</h2>
+            <h2>Experience Calculator</h2>
 
-            <input 
-                type="date"
-                placeholder="Start Date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-            />
+            <label>Start Date</label>
+            <input type="date" value={startDate}
+                   onChange={(e) => setStartDate(e.target.value)} />
 
-            <input 
-                type="date"
-                placeholder="End Date (optional)"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-            />
+            <label>End Date (optional)</label>
+            <input type="date" value={endDate}
+                   onChange={(e) => setEndDate(e.target.value)} />
 
             <button onClick={handleSubmit}>Calculate Experience</button>
 
-            {exp && <p><strong>Experience:</strong> {exp}</p>}
+            {result && <p className="result-text">Experience: {result}</p>}
         </div>
     );
 }
