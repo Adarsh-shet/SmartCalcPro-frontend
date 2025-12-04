@@ -10,42 +10,43 @@
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .navbar button {
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  padding: 12px 22px;
+  background: #4a90e2;
   border: none;
   border-radius: 8px;
   color: white;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.2s ease;
+  transition: 0.3s;
 }
 
 .navbar button:hover {
-  transform: scale(1.08);
+  background: #1c6dd0;
 }
 
+/* Calculator card */
 .calculator-box {
+  background: white;
+  padding: 25px;
   width: 360px;
   margin: auto;
-  padding: 25px;
-  background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
 input, select {
-  width: 100%;
+  width: 90%;
   padding: 12px;
   margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
-button {
+.btn {
   padding: 12px 25px;
   background: #28a745;
   color: white;
@@ -53,15 +54,16 @@ button {
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-button:hover {
-  background: #218838;
+.btn:hover {
+  background: #1f7e32;
 }
 
 .result-text {
-  margin-top: 15px;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 600;
+  margin-top: 20px;
   color: #333;
 }
