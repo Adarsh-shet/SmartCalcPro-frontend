@@ -3,34 +3,36 @@ import { calculateAge } from '../services/api';
 
 function AgeCalculator() {
     const [dob, setDob] = useState('');
-    const [data, setData] = useState(null);
+    const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async () => {
-        if (!dob) return alert("Please select your Date of Birth");
-
-        const result = await calculateAge(dob);
-        setData(result);
+        if (!dob) { alert("Please enter your date of birth"); return; }
+        setLoading(true);
+        try {
+            const res = await calculateAge(dob);
+            setResult(res); // { years, months, days, formatted }
+        } catch (err) {
+            console.error(err);
+            alert("API fetch failed");
+        } finally { setLoading(false); }
     };
 
     return (
         <div className="calculator-box">
             <h2>Age Calculator</h2>
+            <div className="input">
+                <label className="small">Enter your date of birth</label>
+                <input type="date" value={dob} onChange={e => setDob(e.target.value)} />
+            </div>
 
-            <input
-                type="date"
-                placeholder="Enter your Date of Birth"
-                value={dob}
-                onChange={e => setDob(e.target.value)}
-            />
+            <button className="button" onClick={handleSubmit} disabled={loading}>
+                {loading ? "Calculating..." : "Calculate Age"}
+            </button>
 
-            <button className="btn" onClick={handleSubmit}>Calculate Age</button>
-
-            {data && (
-                <p className="result-text">
-                    {data.years} Years, {data.months} Months, {data.days} Days
-                </p>
-            )}
+            {result && <div className="result">{result.formatted}</div>}
         </div>
     );
 }
+
 export default AgeCalculator;
