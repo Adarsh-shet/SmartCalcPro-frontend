@@ -11,18 +11,19 @@ function AgeCalculator() {
             const result = await calculateAge(dob);
             setAge(result);
         } catch (err) {
-            alert("API fetch failed");
+            alert("API error");
         }
     };
 
     return (
-        <div className="calculator-box">
+        <div className="card">
             <h2>Age Calculator</h2>
 
-            <input type="date" value={dob} onChange={e => setDob(e.target.value)} />
-            <button onClick={handleSubmit}>Calculate Age</button>
+            <input type="date" value={dob} onChange={(e) => setDob(e.target.value)} />
 
-            {age && <p>Age: {age}</p>}
+            <button onClick={handleSubmit}>Calculate</button>
+
+            {age && <p className="result">{age}</p>}
         </div>
     );
 }
