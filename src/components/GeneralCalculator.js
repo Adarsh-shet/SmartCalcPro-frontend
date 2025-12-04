@@ -1,24 +1,16 @@
 import React, { useState } from "react";
-import { calculateGeneral } from "../services/api";
+import BASE_URL from "../api";
 
 function GeneralCalculator() {
-    const [num1, setNum1] = useState("");
-    const [num2, setNum2] = useState("");
-    const [operation, setOperation] = useState("add");
+    const [expression, setExpression] = useState("");
     const [result, setResult] = useState(null);
 
-    const handleCalculate = async () => {
-        if (num1 === "" || num2 === "") {
-            alert("Please enter both numbers");
-            return;
-        }
-
-        try {
-            const res = await calculateGeneral(num1, num2, operation);
-           setResult(res);
-        } catch (err) {
-            alert("Error calling API");
-        }
+    const calculateGeneral = async () => {
+        const res = await fetch(
+            `${BASE_URL}/general?expression=${encodeURIComponent(expression)}`
+        );
+        const data = await res.json();
+        setResult(data);
     };
 
     return (
@@ -26,31 +18,15 @@ function GeneralCalculator() {
             <h2>General Calculator</h2>
 
             <input
-                type="number"
-                placeholder="Enter number 1"
-                value={num1}
-                onChange={(e) => setNum1(e.target.value)}
+                type="text"
+                placeholder="Enter expression, e.g., 10+20*3"
+                value={expression}
+                onChange={(e) => setExpression(e.target.value)}
             />
 
-            <input
-                type="number"
-                placeholder="Enter number 2"
-                value={num2}
-                onChange={(e) => setNum2(e.target.value)}
-            />
+            <button onClick={calculateGeneral}>Calculate</button>
 
-            <select value={operation} onChange={(e) => setOperation(e.target.value)}>
-                <option value="add">Addition</option>
-                <option value="sub">Subtraction</option>
-                <option value="mul">Multiplication</option>
-                <option value="div">Division</option>
-            </select>
-
-            <button onClick={handleCalculate}>Calculate</button>
-
-            {result !== null && (
-                <h3>Result: {result}</h3>
-            )}
+            {result !== null && <p>Result: {result}</p>}
         </div>
     );
 }
