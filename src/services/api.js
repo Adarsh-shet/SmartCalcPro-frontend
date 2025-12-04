@@ -1,13 +1,13 @@
 const BASE_URL = process.env.REACT_APP_API_URL;
 
-// AGE
+// AGE API
 export const calculateAge = async (dob) => {
     const res = await fetch(`${BASE_URL}/api/calc/age?dob=${dob}`);
     if (!res.ok) throw new Error("API Error");
     return res.json();
 };
 
-// EXPERIENCE
+// EXPERIENCE API
 export const calculateExperience = async (startDate) => {
     const res = await fetch(`${BASE_URL}/api/calc/experience?startDate=${startDate}`);
     if (!res.ok) throw new Error("API Error");
