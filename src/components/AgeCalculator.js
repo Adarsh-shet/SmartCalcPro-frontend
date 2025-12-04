@@ -3,15 +3,14 @@ import { calculateAge } from '../services/api';
 
 function AgeCalculator() {
     const [dob, setDob] = useState('');
-    const [age, setAge] = useState(null);
+    const [age, setAge] = useState('');
 
     const handleSubmit = async () => {
         if (!dob) return;
         try {
             const result = await calculateAge(dob);
             setAge(result);
-        } catch(err) {
-            console.error(err);
+        } catch (err) {
             alert("API fetch failed");
         }
     };
@@ -19,9 +18,11 @@ function AgeCalculator() {
     return (
         <div className="calculator-box">
             <h2>Age Calculator</h2>
+
             <input type="date" value={dob} onChange={e => setDob(e.target.value)} />
             <button onClick={handleSubmit}>Calculate Age</button>
-            {age !== null && <p>Age: {age} years</p>}
+
+            {age && <p>Age: {age}</p>}
         </div>
     );
 }
