@@ -15,7 +15,7 @@ function GeneralCalculator() {
 
         try {
             const res = await calculateGeneral(num1, num2, operation);
-            setResult(res.result);
+           setResult(res);
         } catch (err) {
             alert("Error calling API");
         }
