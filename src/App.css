@@ -1,79 +1,67 @@
-body {
-  background: linear-gradient(135deg, #4e54c8, #8f94fb);
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-}
-
 .App {
   text-align: center;
-  color: white;
-  padding-top: 30px;
+  font-family: 'Poppins', sans-serif;
+  padding: 30px;
+  background: #eef2f3;
+  min-height: 100vh;
 }
 
 .navbar {
-  margin: 25px auto;
   display: flex;
-  gap: 15px;
   justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .navbar button {
-  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
   border: none;
-  padding: 12px 22px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+  border-radius: 8px;
   color: white;
+  cursor: pointer;
   font-size: 16px;
-  transition: 0.3s;
+  transition: 0.2s ease;
 }
 
 .navbar button:hover {
-  background: rgba(255, 255, 255, 0.4);
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-.card {
-  width: 380px;
-  margin: 20px auto;
-  background: rgba(255, 255, 255, 0.15);
+.calculator-box {
+  width: 360px;
+  margin: auto;
   padding: 25px;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  color: white;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 input, select {
-  width: 90%;
+  width: 100%;
   padding: 12px;
   margin: 10px 0;
-  border-radius: 10px;
-  border: none;
-  outline: none;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 button {
   padding: 12px 25px;
-  background: #00e676;
+  background: #28a745;
+  color: white;
   border: none;
-  color: black;
-  font-weight: bold;
-  border-radius: 10px;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: 0.3s;
 }
 
 button:hover {
-  background: #00c853;
-  transform: scale(1.05);
+  background: #218838;
 }
 
-.result {
-  font-size: 20px;
+.result-text {
   margin-top: 15px;
+  font-size: 18px;
   font-weight: bold;
+  color: #333;
 }
