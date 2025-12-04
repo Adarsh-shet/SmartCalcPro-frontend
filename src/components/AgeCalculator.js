@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { calculateAge } from '../api';
+import { calculateAge } from '../services/api';
 
 function AgeCalculator() {
     const [dob, setDob] = useState('');
@@ -7,28 +7,23 @@ function AgeCalculator() {
 
     const handleSubmit = async () => {
         if (!dob) return;
-
         try {
-            const result = await calculateAge(dob); 
-            setAge(result);  // backend returns only number, example: 1
+            const result = await calculateAge(dob);
+            setAge(result);
         } catch (err) {
-            console.error("Fetch error:", err);
+            console.error("API error:", err);
         }
     };
 
     return (
         <div className="calculator-box">
             <h2>Age Calculator</h2>
-
-            <input
-                type="date"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-            />
-
+            <input type="date" value={dob} onChange={e => setDob(e.target.value)} />
             <button onClick={handleSubmit}>Calculate Age</button>
 
-            {age !== null && <p>Age: {age} years</p>}
+            {age !== null && (
+                <p>Age: {age} years</p>
+            )}
         </div>
     );
 }
