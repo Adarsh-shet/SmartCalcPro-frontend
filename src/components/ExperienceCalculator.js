@@ -1,39 +1,33 @@
-import React, { useState } from "react";
-import { calculateExperience } from "../services/api";
+import React, { useState } from 'react';
+import { calculateExperience } from '../services/api';
 
 function ExperienceCalculator() {
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [result, setResult] = useState("");
+    const [start, setStart] = useState('');
+    const [end, setEnd] = useState('');
+    const [data, setData] = useState(null);
 
     const handleSubmit = async () => {
-        if (!startDate) return alert("Enter start date");
-        
-        try {
-            const res = await calculateExperience(startDate, endDate);
-            setResult(res);
-        } catch (err) {
-            alert("Error fetching experience");
-        }
+        if (!start || !end) return alert("Please select both dates");
+
+        const result = await calculateExperience(start, end);
+        setData(result);
     };
 
     return (
         <div className="calculator-box">
             <h2>Experience Calculator</h2>
 
-            <label>Start Date</label>
-            <input type="date" value={startDate}
-                   onChange={(e) => setStartDate(e.target.value)} />
+            <input type="date" value={start} onChange={e => setStart(e.target.value)} />
+            <input type="date" value={end} onChange={e => setEnd(e.target.value)} />
 
-            <label>End Date (optional)</label>
-            <input type="date" value={endDate}
-                   onChange={(e) => setEndDate(e.target.value)} />
+            <button className="btn" onClick={handleSubmit}>Calculate Experience</button>
 
-            <button onClick={handleSubmit}>Calculate Experience</button>
-
-            {result && <p className="result-text">Experience: {result}</p>}
+            {data && (
+                <p className="result-text">
+                    {data.years} Years, {data.months} Months, {data.days} Days
+                </p>
+            )}
         </div>
     );
 }
-
 export default ExperienceCalculator;
