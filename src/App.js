@@ -26,7 +26,7 @@ function App() {
             </main>
 
             <footer>
-                <small>SmartCalcPro — colorful UI (Option C) — No dark mode</small>
+                <small>SmartCalcPro — By Adarsh shet</small>
             </footer>
         </div>
     );
