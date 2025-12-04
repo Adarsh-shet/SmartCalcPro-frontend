@@ -1,31 +1,43 @@
-import React, { useState } from "react";
-import { calculateEmi } from "../services/api";
+import React, { useState } from 'react';
+import { calculateEMI } from '../services/api';
 
 function EmiCalculator() {
-    const [p, setP] = useState("");
-    const [r, setR] = useState("");
-    const [m, setM] = useState("");
-    const [emi, setEmi] = useState(null);
+    const [principal, setPrincipal] = useState('');
+    const [rate, setRate] = useState('');
+    const [months, setMonths] = useState('');
+    const [result, setResult] = useState(null);
 
-    const handleCalculate = async () => {
-        if (!p || !r || !m) return alert("Enter all fields");
-
-        const result = await calculateEmi(p, r, m);
-        setEmi(result.toFixed(2));
+    const handleSubmit = async () => {
+        if (!principal || !rate || !months) { alert("Fill all fields"); return; }
+        try {
+            const res = await calculateEMI(principal, rate, months);
+            setResult(res); // { emi, totalAmount, totalInterest }
+        } catch (err) {
+            console.error(err); alert("API fetch failed");
+        }
     };
 
     return (
         <div className="calculator-box">
             <h2>EMI Calculator</h2>
 
-            <input type="number" placeholder="Loan Amount" value={p} onChange={e => setP(e.target.value)} />
-            <input type="number" placeholder="Interest Rate (%)" value={r} onChange={e => setR(e.target.value)} />
-            <input type="number" placeholder="Duration (Months)" value={m} onChange={e => setM(e.target.value)} />
+            <div className="input">
+                <input type="number" placeholder="Principal (e.g. 500000)" value={principal} onChange={e => setPrincipal(e.target.value)} />
+                <input type="number" placeholder="Annual Rate % (e.g. 7.5)" value={rate} onChange={e => setRate(e.target.value)} />
+                <input type="number" placeholder="Tenure (months) e.g. 60" value={months} onChange={e => setMonths(e.target.value)} />
+            </div>
 
-            <button className="btn" onClick={handleCalculate}>Calculate EMI</button>
+            <button className="button" onClick={handleSubmit}>Calculate EMI</button>
 
-            {emi && <p className="result-text">Monthly EMI: ₹{emi}</p>}
+            {result && (
+                <div className="result">
+                    EMI: ₹{result.emi} <br/>
+                    Total Interest: ₹{result.totalInterest} <br/>
+                    Total Amount: ₹{result.totalAmount}
+                </div>
+            )}
         </div>
     );
 }
+
 export default EmiCalculator;
