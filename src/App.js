@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import AgeCalculator from './components/AgeCalculator';
 import ExperienceCalculator from './components/ExperienceCalculator';
+import EmiCalculator from './components/EmiCalculator';
 import GeneralCalculator from './components/GeneralCalculator';
 import './App.css';
 
@@ -14,6 +15,7 @@ function App() {
             <Navbar setPage={setPage} />
             {page === 'age' && <AgeCalculator />}
             {page === 'experience' && <ExperienceCalculator />}
+            {page === 'emi' && <EmiCalculator />}
             {page === 'general' && <GeneralCalculator />}
         </div>
     );
